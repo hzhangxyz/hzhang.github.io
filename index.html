@@ -3,83 +3,83 @@ layout: page
 ---
 
 <div id="temporary-cover" style="position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);">
+                         top: 50%;
+                         left: 50%;
+                         -webkit-transform: translate(-50%, -50%);
+                         transform: translate(-50%, -50%);">
 </div>
 
 <script type="text/javascript">
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/Aleph0.svg');
-    xhr.onload = function(){
-        document.getElementById("temporary-cover").innerHTML = xhr.responseText;
-        document.getElementById("temporary-cover").firstElementChild.style.transform = "scale(0.5, 0.5)";
-    }
-    xhr.send()
+   var xhr = new XMLHttpRequest();
+xhr.open('GET', '/Aleph0.svg');
+xhr.onload = function(){
+   document.getElementById("temporary-cover").innerHTML = xhr.responseText;
+   document.getElementById("temporary-cover").firstElementChild.style.transform = "scale(0.5, 0.5)";
+}
+xhr.send()
 
-    window.onload = function() {
-        var n1 = 0;
-        var n2 = 100;
-        var h1 = setInterval(function(){ 
-            if(n1 < 100){ 
-                n1+=10; 
-                document.getElementById("temporary-cover-content").style.opacity = n1/100.;
-            }else{ 
-                clearTimeout(h1); 
-            } 
-        },50);
-        var h2 = setInterval(function(){
-            if(n2 > 0){
-                n2-=10;
-                document.getElementById("temporary-cover").style.opacity = n2/100.;
-            }else{
-                clearTimeout(h2);
-                document.getElementById("temporary-cover").style.display = "none";
-            }
-        },50);
-     }
+window.onload = function() {
+   var n1 = 0;
+   var n2 = 100;
+   var h1 = setInterval(function(){ 
+      if(n1 < 100){ 
+         n1+=10; 
+         document.getElementById("temporary-cover-content").style.opacity = n1/100.;
+      }else{ 
+         clearTimeout(h1); 
+      } 
+   },50);
+   var h2 = setInterval(function(){
+      if(n2 > 0){
+         n2-=10;
+         document.getElementById("temporary-cover").style.opacity = n2/100.;
+      }else{
+         clearTimeout(h2);
+         document.getElementById("temporary-cover").style.display = "none";
+      }
+   },50);
+}
 </script>
 
 <div id="temporary-cover-content" style="position: static;
-    left: 0px; 
-    right: 0px; 
-    top: 0px; 
-    bottom: 0px; 
-    z-index: 99;
-    opacity: 0;">
+                                 left: 0px; 
+                                 right: 0px; 
+                                 top: 0px; 
+                                 bottom: 0px; 
+                                 z-index: 99;
+                                 opacity: 0;">
 
-<div class="home">
+   <div class="home">
 
-  {% capture site_lang %}{{ site.lang | default: "en" }}{% endcapture %}
+      {% capture site_lang %}{{ site.lang | default: "en" }}{% endcapture %}
 
-  <ul class="post-list">
-    {% for post in paginator.posts %}
-      {% capture post_lang %}{{ post.lang | default: site_lang }}{% endcapture %}
-      {% capture lang %}{% if post_lang != site_lang %}{{ post_lang }}{% endif %}{% endcapture %}
+      <ul class="post-list">
+         {% for post in paginator.posts %}
+         {% capture post_lang %}{{ post.lang | default: site_lang }}{% endcapture %}
+         {% capture lang %}{% if post_lang != site_lang %}{{ post_lang }}{% endif %}{% endcapture %}
 
-      <li{% if lang != empty %} lang="{{ lang }}"{% endif %}>
-        <header class="post-header">
-          <h1 class="post-title">
-            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}</a>
-          </h1>
+         <li{% if lang != empty %} lang="{{ lang }}"{% endif %}>
+            <header class="post-header">
+               <h1 class="post-title">
+                  <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}</a>
+               </h1>
 
-          <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}{% if post.categories != empty %} • {% include category_links.html categories=post.categories %}{% endif %}</p>
-        </header>
+               <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}{% if post.categories != empty %} • {% include category_links.html categories=post.categories %}{% endif %}</p>
+            </header>
 
-        <div class="post-content">
-          {{ post.excerpt }}
-        </div>
-        {% if post.content contains site.excerpt_separator %}
-          <p class="post-continue">
+            <div class="post-content">
+               {{ post.excerpt }}
+            </div>
+            {% if post.content contains site.excerpt_separator %}
+            <p class="post-continue">
             <a href="{{ post.url | relative_url }}">Read on &rarr;</a>
-          </p>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+            </p>
+            {% endif %}
+         </li>
+         {% endfor %}
+      </ul>
 
-  {% include pagination.html %}
+      {% include pagination.html %}
 
-</div>
+   </div>
 </div>
